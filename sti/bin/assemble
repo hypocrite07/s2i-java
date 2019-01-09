@@ -15,9 +15,8 @@ DEPLOY_DIR=/opt/openshift
 # TODO: Remove. Why do we need to move the source???
 if compgen -G "/tmp/src/*" >/dev/null; then
   mkdir -p $LOCAL_SOURCE_DIR
-  cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
+  cp -rTad /tmp/src $LOCAL_SOURCE_DIR
 fi
-
 
 if [ -d $LOCAL_SOURCE_DIR/configuration ]; then
   echo "Copying config files from project..."
@@ -142,5 +141,25 @@ else
   echo "[ERROR] No app.jar file located in ${DEPLOY_DIR}"
   exit 1
 fi
+
+# clean up
+echo "---> Removing Build Files"
+for file in $HOME/*; do
+  echo "Deleting $file"
+  rm -rf $file
+done
+
+for file in $HOME/.*; do
+  if [[ $file =~ (\.\.)+|(.\.m2) ]] ; then echo "Skip $file";
+  else echo "Deleting $file"; rm -rf $file || echo "Couldn't delete $file";
+  fi
+done
+
+echo "Clean up maven repository..."
+if [ -d "$HOME/.m2/repository" ]; then
+  rm -r "$HOME/.m2/repository"
+fi
+
+echo "Clean up has done!"
 
 exit 0
