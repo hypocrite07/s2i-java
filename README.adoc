@@ -1,5 +1,5 @@
 == OpenShift S2I Builder for Java
-This Source-to-Image Builder let's you create projects targetting Java OpenJDK 8 and built with:
+This Source-to-Image Builder let's you create projects targetting Java OpenJDK 11 (see fork/java([1-9](\.[0-9])?) for  the particular jdk version) and built with:
 
 * maven
 * gradle
@@ -16,6 +16,7 @@ This builder/runtime s2i image can be used with SpringBoot, Vert.X, Wildfly Swar
 == RUN ENV Options
 
 * *APP_OPTIONS*: Options to pass to *java -jar app.jar ${APP_OPTIONS}*
+* *JVM_OPTIONS*: Options to pass to *java ${JVM_OPTIONS} -jar app.jar*
 
 
 == Defaults
