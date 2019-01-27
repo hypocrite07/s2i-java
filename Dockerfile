@@ -4,7 +4,7 @@ MAINTAINER Aleksandr Goncharov <hypocrite0707@gmail.com>
 # HOME in base image is /opt/app-root/src
 
 # Install build tools on top of base image
-RUN INSTALL_PKGS="tar unzip bc which lsof java-11-openjdk java-11-openjdk-devel" && \
+RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y && \

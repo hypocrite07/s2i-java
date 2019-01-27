@@ -102,7 +102,7 @@ elif [ -f "$LOCAL_SOURCE_DIR/build.gradle" ]; then
   $GRADLE_CMD clean
 
   # Execute the actual build. Avoid deamon usage in order speed up the buid
-  $GRADLE_CMD --refresh-dependencies -Dorg.gradle.daemon=false -s $BUILDER_ARGS
+  $GRADLE_CMD -s $BUILDER_ARGS --refresh-dependencies --no-daemon
 
   ERR=$?
   if [ $ERR -ne 0 ]; then
