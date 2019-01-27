@@ -93,16 +93,13 @@ elif [ -f "$LOCAL_SOURCE_DIR/build.gradle" ]; then
     # TODO: Specify setting file with -c sss
   fi
 
-  echo "Found gradle.build ... attempting to build with '$GRADLE_CMD -s ${BUILDER_ARGS}'"
+  echo "Found gradle.build ... attempting to build with '$GRADLE_CMD -s ${BUILDER_ARGS} --refresh-dependencies --no-daemon'"
 
   echo "Gradle version:"
   $GRADLE_CMD --version
 
-  echo "Gradle clean..."
-  $GRADLE_CMD clean
-
   # Execute the actual build. Avoid deamon usage in order speed up the buid
-  $GRADLE_CMD --refresh-dependencies -Dorg.gradle.daemon=false -s $BUILDER_ARGS
+  $GRADLE_CMD -s $BUILDER_ARGS --refresh-dependencies --no-daemon
 
   ERR=$?
   if [ $ERR -ne 0 ]; then
@@ -116,10 +113,7 @@ elif [ -f "$LOCAL_SOURCE_DIR/build.gradle" ]; then
   copy_artifacts "$ARTIFACT_DIR" jar
 
   # clean up after maven
-  $GRADLE_CMD clean
-#  if [ -d "$HOME/.m2/repository" ]; then
-#    rm -r "$HOME/.m2/repository"
-#  fi
+  $GRADLE_CMD clean --no-daemon
 
   popd &> /dev/null
 else
