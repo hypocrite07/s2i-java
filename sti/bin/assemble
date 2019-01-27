@@ -113,7 +113,7 @@ elif [ -f "$LOCAL_SOURCE_DIR/build.gradle" ]; then
   copy_artifacts "$ARTIFACT_DIR" jar
 
   # clean up after maven
-  $GRADLE_CMD clean
+  $GRADLE_CMD clean --no-daemon
 
   popd &> /dev/null
 else
