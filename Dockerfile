@@ -20,7 +20,7 @@ RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries
     ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn && \
     mkdir -p $HOME/.m2 && chmod -R a+rwX $HOME/.m2
 
-ENV GRADLE_VERSION 4.10
+ENV GRADLE_VERSION 4.10.2
 RUN curl -sL -0 https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o /tmp/gradle-${GRADLE_VERSION}-bin.zip && \
     unzip /tmp/gradle-${GRADLE_VERSION}-bin.zip -d /usr/local/ && \
     rm /tmp/gradle-${GRADLE_VERSION}-bin.zip && \
@@ -32,9 +32,9 @@ ENV PATH=/opt/maven/bin/:/opt/gradle/bin/:$PATH
 ENV BUILDER_VERSION 1.0
 
 LABEL io.k8s.description="Platform for building Java (fatjar) applications with maven or gradle" \
-      io.k8s.display-name="Java S2I builder 1.0" \
+      io.k8s.display-name="Java S2I builder 1.1" \
       io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,maven-3,gradle-4,java,microservices,fatjar"
+      io.openshift.tags="builder,maven-3,gradle-4,java,jdk11,microservices,fatjar"
 
 # TODO (optional): Copy the builder files into /opt/openshift
 # COPY ./<builder_folder>/ /opt/openshift/
